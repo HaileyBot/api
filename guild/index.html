@@ -21,8 +21,7 @@
     }
     document.write(JSON.stringify(r, null, 2));
    });
-   oReq.open("GET", `https://discordapp.com/api/guilds/${options.id}/widget.json`);
-   oReq.setRequestHeader("access-control-allow-origin", "*");
+   oReq.open("GET", `https://cors-anywhere.herokuapp.com/https://discordapp.com/api/guilds/${options.id}/widget.json`);
    oReq.send();
   }
  </script>
