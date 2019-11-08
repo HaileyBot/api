@@ -3,7 +3,7 @@
   let href = window.location.href.split("?").pop(),
    widget, options = {};
   href.split("&").forEach(o => options[o.split("=")[0]] = o.split("=")[1]);
-  if (!options.id) document.write('{"error":"Must provide a server ID in HREF options"}');
+  if (!options.id) document.write(JSON.stringify({error:"Must provide a server ID in HREF options"}, null, 2));
   else {
    var oReq = new XMLHttpRequest();
    oReq.addEventListener("load", function() {
@@ -17,11 +17,12 @@
       r = { error: "Must enable server widget for API to work" };
       break;
      default:
-      r = options;
+      r = widget;
     }
-    document.write(JSON.stringify(r));
+    document.write(JSON.stringify(r, null, 2));
    });
    oReq.open("GET", `https://discordapp.com/api/guilds/${options.id}/widget.json`);
+   oReq.setRequestHeader("access-control-allow-origin", "*");
    oReq.send();
   }
  </script>
